@@ -1,6 +1,6 @@
 This repo is an attempt to reproduce a memory leak issue with celery + pyamqp's heartbeat functionality: [https://github.com/celery/celery/issues/5047](https://github.com/celery/celery/issues/5047)
 
-Start celery and rabbit my by [installing docker & docker-compose](https://docs.docker.com/get-docker/) and running:
+Start celery and rabbitmq by [installing docker & docker-compose](https://docs.docker.com/get-docker/) and running:
 ```sh
 docker-compose up
 ```
