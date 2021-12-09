@@ -14,4 +14,4 @@ docker-compose up
 1. Run `sudo docker stats` in another terminal window to watch memory usage.
 1. Watch memory usage gradually increase by 300 KB every 10 seconds. 
 
-
+You may need to run the command to kill rabbitmq connections multiple times. Sometimes it reconnects, but it's possible to get it into a bad state where it constantly says "Connection reset by peer".
