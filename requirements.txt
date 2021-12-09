@@ -2,3 +2,4 @@
 -e py-amqp
 -e kombu
 -e billiard
+memory-profiler==0.59.0

@@ -6,4 +6,4 @@ COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD celery -A tasks worker --loglevel=DEBUG --without-gossip --without-heartbeat
+CMD python -m memory_profiler celery -A tasks worker --loglevel=DEBUG --without-gossip --without-heartbeat
