@@ -1,4 +1,4 @@
-celery==5.2.0
-amqp==5.0.6
-kombu==5.2.2
-billiard==3.6.4.0
+-e celery
+-e py-amqp
+-e kombu
+-e billiard

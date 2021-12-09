@@ -4,6 +4,7 @@ More info about the memory leak:
 * [https://github.com/celery/celery/issues/5047](https://github.com/celery/celery/issues/5047)
 * [https://github.com/celery/celery/issues/4843](https://github.com/celery/celery/issues/4843)
 
+1. Run `git submodule update --init --recursive` to get submodules.
 1. Start Celery and RabbitMQ by [installing docker & docker-compose](https://docs.docker.com/get-docker/) and running:
     ```sh
     docker-compose up

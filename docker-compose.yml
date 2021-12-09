@@ -11,3 +11,8 @@ services:
           dockerfile: Dockerfile
         depends_on:
             - rabbitmq
+        volumes:
+            - ./celery/celery/:/celery_app/celery/celery/
+            - ./py-amqp/amqp/:/celery_app/py-amqp/amqp/
+            - ./kombu/kombu/:/celery_app/kombu/kombu/
+            - ./billiard/billiard/:/celery_app/billiard/billiard/

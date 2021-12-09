@@ -1,0 +1,12 @@
+[submodule "celery"]
+	path = celery
+	url = git@github.com:pb-dod/celery.git
+[submodule "billiard"]
+	path = billiard
+	url = git@github.com:pb-dod/billiard.git
+[submodule "py-amqp"]
+	path = py-amqp
+	url = git@github.com:pb-dod/py-amqp.git
+[submodule "kombu"]
+	path = kombu
+	url = git@github.com:pb-dod/kombu.git
