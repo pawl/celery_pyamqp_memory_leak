@@ -4,11 +4,10 @@ More info about the memory leak:
 * [https://github.com/celery/celery/issues/5047](https://github.com/celery/celery/issues/5047)
 * [https://github.com/celery/celery/issues/4843](https://github.com/celery/celery/issues/4843)
 
-Start Celery and RabbitMQ by [installing docker & docker-compose](https://docs.docker.com/get-docker/) and running:
-```sh
-docker-compose up
-```
-
+1. Start Celery and RabbitMQ by [installing docker & docker-compose](https://docs.docker.com/get-docker/) and running:
+    ```sh
+    docker-compose up
+    ```
 1. Wait until you start seeing `ConnectionResetError: [Errno 104] Connection reset by peer` error messages.
 1. Run `sudo docker stats` in another terminal window to watch memory usage.
 1. Watch memory usage gradually increase by 300 KB every 10 seconds. 
