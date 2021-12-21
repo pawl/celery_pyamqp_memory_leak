@@ -2,7 +2,7 @@ import logging
 
 from celery import Celery
 
-app = Celery('tasks', broker='amqp://guest@rabbitmq//', broker_heartbeat=1)
+app = Celery('tasks', broker='redis://redis:6379/0')
 
 @app.task()
 def add(x, y):

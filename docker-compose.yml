@@ -1,18 +1,17 @@
 version: "3.9"
 
 services:
-    rabbitmq:
-        image: rabbitmq:3-management-alpine
-        ports:
-            - 15672:15672
+    redis:
+        image: redis:latest
     celery:
         build:
           context: .
           dockerfile: Dockerfile
         depends_on:
-            - rabbitmq
+            - redis
         volumes:
             - ./celery/celery/:/celery_app/celery/celery/
-            - ./py-amqp/amqp/:/celery_app/py-amqp/amqp/
+            - ./redis-py/redis/:/celery_app/redis-py/redis/
             - ./kombu/kombu/:/celery_app/kombu/kombu/
             - ./billiard/billiard/:/celery_app/billiard/billiard/
+            - ./tasks.py:/celery_app/tasks.py

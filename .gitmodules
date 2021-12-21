@@ -10,3 +10,6 @@
 [submodule "kombu"]
 	path = kombu
 	url = git@github.com:pb-dod/kombu.git
+[submodule "redis-py"]
+	path = redis-py
+	url = git@github.com:redis/redis-py.git

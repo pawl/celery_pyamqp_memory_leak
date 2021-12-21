@@ -1,21 +1,19 @@
-This repo is an attempt to reproduce a memory leak issue with Celery + pyamqp's heartbeat functionality.
+This branch is an attempt to reproduce a memory leak issue with Celery + redis.
 
 More info about the memory leak: 
 * [https://github.com/celery/celery/issues/5047](https://github.com/celery/celery/issues/5047)
 * [https://github.com/celery/celery/issues/4843](https://github.com/celery/celery/issues/4843)
 
 1. Run `git submodule update --init --recursive` to get submodules.
-1. Start Celery and RabbitMQ by [installing docker & docker-compose](https://docs.docker.com/get-docker/) and running:
+1. Start Celery and Redis by [installing docker & docker-compose](https://docs.docker.com/get-docker/) and running:
     ```sh
     docker-compose up
     ```
-1. Wait until you start seeing `ConnectionResetError: [Errno 104] Connection reset by peer` error messages.
-1. Run `sudo docker stats` in another terminal window to watch memory usage.
-1. Watch memory usage gradually increase by 300 KB every 10 seconds. 
+1. Wait until the worker finishes starting. You should see a "basic.qos: prefetch_count->32" message after a few seconds.
+1. Restart redis with `docker-compose restart redis`.
+1. Wait until you see a `ConnectionError` and find the "Top 10 lines" output to see memory usage increase on specific lines of code.
+1. Repeatedly restart redis to see memory usage continue to increase.
 
-In this example, the `broker_heartbeat` is set to 1 and this will make RabbitMQ constantly close connections because Celery isn't responding to heartbeats fast enough. This may simulate what can happen over time when celery fails to respond to heartbeats due to high cpu usage or long running tasks.
+In this example, restarting redis will trigger a `ConnectionError` and somehow this results in the kombu `Transport` not getting cleaned up by garbage collection. This may simulate what can happen over time when celery fails to redis due to connectivity issues.
 
-It may also be possible to increase memory usage with a higher `broker_heartbeat` by killing RabbitMQ connections with this command:
-```bash
-sudo docker-compose exec rabbitmq /bin/sh -c 'rabbitmqadmin -f tsv -q list connections name | while read conn ; do rabbitmqadmin -q close connection name="${conn}" ; done'
-```
+Maybe this is a similar issue to the one Michael Lazar fixed in: [https://github.com/celery/py-amqp/pull/374](https://github.com/celery/py-amqp/pull/374) And maybe we have an unclosed socket still?
