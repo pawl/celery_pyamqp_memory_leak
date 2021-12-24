@@ -16,3 +16,4 @@ services:
             - ./py-amqp/amqp/:/celery_app/py-amqp/amqp/
             - ./kombu/kombu/:/celery_app/kombu/kombu/
             - ./billiard/billiard/:/celery_app/billiard/billiard/
+            - ./tasks.py:/celery_app/tasks.py
