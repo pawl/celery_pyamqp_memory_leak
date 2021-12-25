@@ -16,3 +16,19 @@ services:
             - ./py-amqp/amqp/:/celery_app/py-amqp/amqp/
             - ./kombu/kombu/:/celery_app/kombu/kombu/
             - ./billiard/billiard/:/celery_app/billiard/billiard/
+            - ./tasks.py:/celery_app/tasks.py
+
+    celery-stats:
+        build:
+          context: .
+          dockerfile: Dockerfile2
+        depends_on:
+            - rabbitmq
+            - celery
+        volumes:
+            - ./celery/celery/:/celery_app/celery/celery/
+            - ./py-amqp/amqp/:/celery_app/py-amqp/amqp/
+            - ./kombu/kombu/:/celery_app/kombu/kombu/
+            - ./billiard/billiard/:/celery_app/billiard/billiard/
+            - ./stats.py:/celery_app/stats.py
+            - ./tasks.py:/celery_app/tasks.py
