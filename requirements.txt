@@ -1,5 +1,6 @@
 -e celery
 -e py-amqp
+-e redis-py
 -e kombu
 -e billiard
 memory-profiler==0.59.0
