@@ -1,7 +1,10 @@
 import linecache
 import os
+import gc
 import tracemalloc
 from time import sleep
+
+from pympler import tracker
 
 from tasks import app
 
@@ -43,13 +46,15 @@ def display_top(snapshot, key_type='lineno', limit=10):
 
 tracemalloc.start()
 
+tr = tracker.SummaryTracker()
 
 def main():
     while True:
+        gc.collect()
+        tr.print_diff()
         print_stats()
         snapshot = tracemalloc.take_snapshot()
         display_top(snapshot)
-        sleep(1)
 
 
 if __name__ == '__main__':
