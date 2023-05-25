@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 
 from celery import Celery
 

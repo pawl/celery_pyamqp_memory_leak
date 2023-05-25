@@ -10,8 +10,24 @@ services:
         depends_on:
             - redis
         volumes:
-            - ./celery/celery/:/celery_app/celery/celery/
+            - ./celery/:/celery_app/celery/
             - ./redis-py/redis/:/celery_app/redis-py/redis/
             - ./kombu/kombu/:/celery_app/kombu/kombu/
             - ./billiard/billiard/:/celery_app/billiard/billiard/
             - ./tasks.py:/celery_app/tasks.py
+        restart: always
+
+    celery_task_starter:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        command: "python task_starter.py"
+        depends_on:
+            - redis
+        volumes:
+            - ./celery/celery/:/celery_app/celery/
+            - ./redis-py/redis/:/celery_app/redis-py/redis/
+            - ./kombu/kombu/:/celery_app/kombu/kombu/
+            - ./billiard/billiard/:/celery_app/billiard/billiard/
+            - ./tasks.py:/celery_app/tasks.py
+            - ./task_starter.py:/celery_app/task_starter.py

@@ -2,4 +2,4 @@
 -e redis-py
 -e kombu
 -e billiard
-memory-profiler==0.59.0
+importlib-metadata==4.13.0
