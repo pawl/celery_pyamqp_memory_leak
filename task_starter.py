@@ -4,4 +4,5 @@ from tasks import app, add
 
 while True:
     add.apply_async([1, 2])
-    sleep(1)
+    print('task queued')
+    sleep(.1)
